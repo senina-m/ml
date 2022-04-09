@@ -87,7 +87,7 @@ print(f"Precision: ", metrics.precision_score(Y_true, Y_pred))
 
 Посчитать ```accuracy```: ```reg.score(X, y)```
 
-#KNeighborsClassifier
+# KNeighborsClassifier
 
 Обучение модели методом наименьших соседей с Манхеттанской  ```(p = 1)``` и Евклидовой метриками```(p = 2)```
 
