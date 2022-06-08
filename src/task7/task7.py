@@ -38,6 +38,7 @@ def main():
 
     images, labels = prepare_data('data/train/')
 
+    print(f"images = {np.shape(images)}, labels = {np.shape(labels)}")
     train_data, test_data, train_labels, test_labels = train_test_split(images, labels, test_size=0.25, random_state=int(rand))
 
     model = LinearSVC(random_state=int(rand), C=float(c))
