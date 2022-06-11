@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>readme.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: gray; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B-%D0%B8-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%BA%D1%83%D1%80%D1%81%D0%B0"><strong>Основные методы и пакеты курса</strong></h1>
+<h1 id="%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%8B">Пакеты</h1>
+<p>Пакет для логичтическая реграссии <code>from sklearn.linear_model import LogisticRegression</code></p>
+<p>Пакет с разными метриками <code>from sklearn import metrics</code></p>
+<p>Пакет для метода ближайших соседей <code>from sklearn.neighbors import KNeighborsClassifier as knn</code></p>
+<p>Пакет для дерева решений <code>from sklearn.tree import export_graphviz</code></p>
+<p>Пакет для разделения выборки на тестовую и обучающую <code>from sklearn.model_selection import train_test_split</code></p>
+<p>Метрика F1 из уражнения 7 <code>from sklearn.metrics import f1_score</code></p>
+<p>Метрика со сравнением матриц <code>from sklearn.metrics import confusion_matrix</code></p>
+<p>Пакет для метода опорных векторов <code>from sklearn.svm import LinearSVC</code></p>
+<p>Пакет с классификатором по дереву<code>from sklearn.tree import DecisionTreeClassifier</code></p>
+<p>Пакет с классификатором по лесу <code>from sklearn.ensemble import RandomForestClassifier</code></p>
+<p>Пакет с классификатором One vs Rest <code>from sklearn.multiclass import OneVsRestClassifier</code></p>
+<p>Пакет с методом главных компонент <code>from sklearn.decomposition import PCA</code></p>
+<p>Пакет с датасетами<code>from keras.datasets import mnist</code></p>
+<h1 id="pandas">Pandas</h1>
+<p><strong>Прочитать данные из файла с помощью pandas</strong> (Разделитель <code>delimiter</code>, колонка которая будет использованная как имена строк <code>index_col</code>,
+если  у данных нет заголовка пишем  <code>header=None</code>)</p>
+<p><code>DATA = pd.read_csv(&quot;filename.csv&quot;, delimiter=',', index_col='competitorname', header=None)</code></p>
+<p><code>data = pd.DataFrame(q_list, columns=['q_data'])</code> (q_list = [1, 2, 3, ..., 10])
+<code>data = pd.DataFrame(array[1:], columns=array[0])</code> (q_list = [[name_1, name_2, ...], [], ... []])</p>
+<h2 id="%D0%BF%D0%BE%D0%B4%D1%81%D1%87%D1%91%D1%82-%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8-%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F">Подсчёт значений и условия</h2>
+<p>Количество строк в df
+<code>data.shape[0]</code>, количество строк с условием <code>df[df.A &gt; 0].shape[0]</code></p>
+<p>Строки подходящие под условие значение в столбце A &gt; 0
+<code>df[df.A &gt; 0].shape[0]</code></p>
+<p>Если надо указать несколько условий
+<code>df[(df['A'] &gt; 0) &amp; (df['B'] &gt; 0)]</code></p>
+<h2 id="%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-df">Изменение df</h2>
+<p>Удалить строку с названием
+<code>data.drop([ &quot;row_name1&quot;, &quot;row_name2&quot;, &quot;row_name3&quot;])</code></p>
+<p>Удалить столбцы с названиями
+<code> data.drop(['column1', 'column2'], axis=1)</code></p>
+<p>Сделать новый dataframe
+<code>X = pd.DataFrame(data for dataframe)</code></p>
+<p>Выбрать только столбцы с названиями
+<code>data[['column1', 'column2']]</code></p>
+<p>Выбрать строки с названиями
+<code>data['row1', 'row2']</code></p>
+<p>Выделить строку со значением в столбце <code>colum_1</code> равным данному <code>name_1</code>:
+<code>row = X.loc[X['colum_1'] == 'name_1']</code></p>
+<p>Выбрать из X все строки, у которых в столбце <code>competitorname</code> стоит не <code>name1</code> или <code>name1</code>:
+<code>x = X[~X['competitorname'].isin(['name1', 'name2'])]</code></p>
+<p>Данные без подписей столбцов и строк
+<code>data_frame.values</code></p>
+<p>Данные как массив без подписей
+<code>data_frame.values.ravel()</code></p>
+<p>Строку под номером i не считая заголовков:
+<code>df.iloc[[i]]</code></p>
+<p>Доступ к ячейке в строке с индексом  <em>&quot;row_name&quot;</em> и колонке с названием <em>'Label'</em></p>
+<pre class="hljs"><code><div>idx = list(DATA.index).index(&quot;row_name&quot;)
+df[idx][DATA['Label'][idx]]
+</div></code></pre>
+<h1 id="numpy">Numpy</h1>
+<p>reshape
+<code>np.asarray(data).reshape(n, 1)</code></p>
+<p>Среднее для строчки <code>x_mean = np.mean(line_index)</code></p>
+<p>Среднее для колонки <code>np.mean(table.transpose()[column_index]))</code></p>
+<p>#LinearRegression</p>
+<p>Размерность входных данных для линейной регрессии</p>
+<p><code>x-&gt; [num_of_rows x num_of_columns] y -&gt; [num_of_rows x 1]</code></p>
+<p><code>reg = LinearRegression().fit(x, y)</code></p>
+<p>R квадрат статистка <code>r2 = reg.score(x, y)</code></p>
+<p>Параметры регрессии b_0: <code>reg.intercept_</code></p>
+<p>Параметры регрессии b_1: <code>reg.coef_</code></p>
+<h1 id="pca-%D0%BC%D0%B5%D1%82%D0%BE%D0%B4-%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D1%85-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82">PCA Метод главных компонент</h1>
+<p>Здесь мы задаём в качестве n_components количество главных компонент, которые мы хотим взять.
+svd_solver='full' значит, что метод будет решать &quot;честно&quot;, а не рандомизированно.
+PCA возвращает объект, у которого есть какое-то количество методов
+для вытаскивания полученных данных
+<code>pca = PCA(n_components=10, svd_solver='full')</code></p>
+<p>Метод fit_transform применяет метод к объекту X и переводит его в новые координаты
+с уменьшением размерности
+у него в первом столбце координаты всех объектов по первой главной компоненте,
+во втором -- их же координаты по второй ГК и т.д.
+<code>X_transformed = pca.fit_transform(X)</code></p>
+<p>Можно сделать это отдельно:</p>
+<pre class="hljs"><code><div>pca.fit(x)
+pca.transform(x)
+</div></code></pre>
+<p>Координата k объекта относительно i компонент: <code>X_transformed[k][i]</code></p>
+<p>Считаем сумму доль дисперсий вносимых добавлением каждой новой главной компоненты
+pca -&gt; это объект, который мы получаем считая МГК для указанного количества компонент
+explained_variance_ratio_ -&gt; метод pca выдающий сколько добавление каждой новой компоненты
+добавляет в долю необъяснённой дисперсии.</p>
+<p><code>np.cumsum</code> -&gt; считает сумму массива с накоплением [1, 2, 3] -&gt; [1, 3, 6]</p>
+<p><code>explained_variance = np.cumsum(pca.explained_variance_ratio_)</code></p>
+<p>Доля необъяснённой дисперсии для i + 1 компонент:<code> explained_variance[i]</code></p>
+<h1 id="logisticregression">LogisticRegression</h1>
+<p><code>reg = LogisticRegression(random_state=, solver='lbfgs').fit(X, y)</code></p>
+<p>Предсказание с помощью обученной модели, порог отсечения по умолчанию составляет 0.5 <code>Y_pred = reg.predict(X_test)</code></p>
+<p>Предсказать вероятности оценок <code>Y_pred_probs = reg.predict_proba(X_test)</code></p>
+<p><code>predict_proba()</code> возвращает таблицу, где каждая строка соответствует <code>i</code> объекту выборки, а каждый столбец к <code>j</code> классу</p>
+<p>Это можно сделать даже для таблицы с объектами:
+<code>y_pred = reg.predict_proba(x_test)</code></p>
+<p>Пример: <code>For candy {question_candy_name1} probability of 0 = {Y_pred_probs[candy1_number][0]}</code></p>
+<pre class="hljs"><code><div>Y_pred_probs_class_1 = Y_pred_probs[:, 1]
+print(Y_pred_probs_class_1)
+
+Y_true = (test_data['Y'].to_frame().T).values.ravel()
+fpr, tpr, _ = metrics.roc_curve(Y_true, Y_pred)
+вычисляем AUC
+print(f&quot;AUC: &quot;, metrics.roc_auc_score(Y_true, Y_pred_probs_class_1))
+вычисление Recall
+print(f&quot;Recall: &quot;, metrics.recall_score(Y_true, Y_pred))
+вычисление Precision
+print(f&quot;Precision: &quot;, metrics.precision_score(Y_true, Y_pred))
+</div></code></pre>
+<p>Посчитать <code>accuracy</code>: <code>reg.score(X, y)</code></p>
+<h1 id="kneighborsclassifier">KNeighborsClassifier</h1>
+<p>Обучение модели методом наименьших соседей с Манхеттанской  <code>(p = 1)</code> и Евклидовой метриками<code>(p = 2)</code></p>
+<p><code>euclid = knn(n_neighbors = num_of_neighbors, p = 2)</code> <code>euclid.fit(X, y)</code></p>
+<p><code>manhattan = knn(n_neighbors = num_of_neighbors, p = 1)</code> <code>manhattan.fit(X, y)</code></p>
+<p><code>Object = [coordinate_x, coordinate_y]</code>
+Предсказанный класс для евклидовой метрики: <code>euclid.predict([Object])</code></p>
+<p>Предсказанный класс для манхетенская метрики: <code>manhattan.predict([Object])</code></p>
+<p>Ближайшие соседи для Евклидовой в порядке возрастания расстояний</p>
+<p>id элементов сдвинуто на 1, то есть, если во втором массиве вы получаете [1,2,3], то ответ будет: 2,3,4</p>
+<p>Ближайшие соседи для евклидовой метрики: <code>euclid.kneighbors([Object])</code></p>
+<h1 id="linearsvc-%D0%BE%D0%BF%D0%BE%D1%80%D0%BD%D1%8B%D0%B5-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0">LinearSVC опорные вектора</h1>
+<p>Извлечение гистограммы из картинки</p>
+<pre class="hljs"><code><div>def extract_histogram(image, bins=(8, 8, 8)):
+    hist = cv2.calcHist([image], [0, 1, 2], None, bins, [0, 256, 0, 256, 0, 256])
+    cv2.normalize(hist, hist)
+    return hist.flatten()
+</div></code></pre>
+<p>Построение модели по методу опорных векторов
+<code>model = LinearSVC(random_state=int(rand), C=float(c))</code></p>
+<p>Обучение модели
+<code>model.fit(train_data, train_labels)</code></p>
+<p>Применение обученой модели на полученных данных
+<code>predictions = model.predict(test_data)</code></p>
+<p>Коэффициенты модели <code>model.coef_</code></p>
+<p>Применение метрики F1
+<code>f1_score(test_labels, predictions, average='macro')</code></p>
+<p>Применение метрики точности предсказания<br>
+<code>from sklearn.metrics import accuracy_score</code></p>
+<h1 id="os-%D0%BE%D1%82%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8-%D0%BF%D0%BE-%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8E">os отфильтровать картинки по названию</h1>
+<p>Директория из которой запустили скрипт <code>os.path.dirname(os.path.abspath(__file__))</code></p>
+<p>Все имена файлов директории с данным путём <code>os.listdir(path)</code></p>
+<p>Заканчивается ли строка х на .jpg <code>x.endswith('.jpg')</code></p>
+<p>Файл с путём до директории <code>path</code> и именем файла <code>x</code>: <code>f = os.path.join(path, x)</code></p>
+<p>Извлечение гистограммы из картинки с помощью пакета <code>cv2</code>: <code>extract_histogram(cv2.imread(f))</code></p>
+<h1 id="traintestsplit">train_test_split()</h1>
+<p>Пример разделения выборки на обучающую и тестовую 75% к 25% рандомным способом с рандомизацией <code>rand</code></p>
+<p>Тут m предикторов это массив <code>images[n x m]</code> и отклик это <code>labes[1 x n]</code>  :</p>
+<p><code>train_data, test_data, train_labels, test_labels = train_test_split(images, labels, test_size=0.25, random_state=int(rand))</code></p>
+<p>Если не нужно перемешивать данные:</p>
+<p><code>train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.2, shuffle=False)</code></p>
+<h1 id="decisiontreeclassifier">DecisionTreeClassifier</h1>
+<p>Метод создания модели дерева
+<code>tree = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=10, max_leaf_nodes=15, random_state=2020)</code></p>
+<p>Метод обучения дерева на тренировочных данных
+<code>clf = tree.fit(train_x, train_y)</code></p>
+<p>Глубина дерева <code>clf.tree_.max_depth</code></p>
+<p>Предсказать вероятности для каждого класса, что объект будет к нему отнесён:
+<code>y_pred = clf.predict_proba(test_x)</code></p>
+<h2 id="%D0%B2%D0%B8%D0%B7%D1%83%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%B0-dot">Визуализация дерева .dot</h2>
+<p>Чтобы визуализиовать дерево из метода дерева решений можно воспользоваться этим кодом из упражнения:</p>
+<pre class="hljs"><code><div>from sklearn.tree import export_graphviz
+import graphviz
+columns = list(train_x.columns)
+export_graphviz(clf, out_file='tree.dot', 
+                feature_names=columns,
+                class_names=['0', '1'],
+                rounded = True, proportion = False, 
+                precision = 2, filled = True, label='all')
+
+with open('tree.dot') as f:
+    dot_graph = f.read()
+
+graphviz.Source(dot_graph)
+</div></code></pre>
+<p>В итоге, запуск программы сгенерит файл tree.dot который можно открыть (ctrl + shift + v в vscode)
+и посмотреть на само дерево глазами, если устновить дополнение: <em>Graphviz (dot) language support for Visual Studio Code</em></p>
+<h1 id="randomforestclassifier">RandomForestClassifier</h1>
+<p>Метод создания модели. Внимательнее с параметрами, лучше смотреть документацию
+<code>random_forest = RandomForestClassifier(criterion='gini', min_samples_leaf=10, max_depth=20, n_estimators=10, random_state=54) </code></p>
+<p><code>clf_random_forest = OneVsRestClassifier(random_forest)</code></p>
+<p><code>clf_random_forest.fit(X_train, y_train)</code></p>
+<p>Предсказание с помощью этой модели
+<code>y_pred = clf_random_forest.predict(X_test)</code></p>
+<p>Метрика -- <em>матрица ошибок</em> -- таблица n x n, если предикторов n штук
+в каждой ячейке (i, j) указано сколько предсказано случаев, когда реально было i а предсказали j.
+<code>CM = confusion_matrix(y_test, y_pred)</code></p>
+<p>Предсказать вероятности для каждого класса, что объект будет к нему отнесён:
+<code>y_pred = clf_random_forest.predict_proba(X_test)</code></p>
+<h1 id="mnist">MNIST</h1>
+<p>Загрузить датасет с рукописными циферками
+<code>(X_train, y_train), (X_pred, y_pred) = mnist.load_data()</code></p>
+<p>Там картинки размера 28*28, т.е. надо будет ещё данные reshape-ить:</p>
+<pre class="hljs"><code><div>x_train_reshaped = X_train.reshape(len(X_train), 784)
+</div></code></pre>
+<h1 id="onevsrestclassifier">OneVsRestClassifier</h1>
+<p>clasificator_model == модель которой мы будем обучать много мелких датасетов
+train_x, train_y -- тренировочные данные из которых будем делать датасеты</p>
+<p><code>clf = OneVsRestClassifier(clasificator_model).fit(train_x, train_y)</code></p>
+
+</body>
+</html>

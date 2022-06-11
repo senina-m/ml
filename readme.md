@@ -13,7 +13,19 @@
 
 Метрика F1 из уражнения 7 ```from sklearn.metrics import f1_score```
 
+Метрика со сравнением матриц ```from sklearn.metrics import confusion_matrix```
+
 Пакет для метода опорных векторов ```from sklearn.svm import LinearSVC```
+
+Пакет с классификатором по дереву```from sklearn.tree import DecisionTreeClassifier```
+
+Пакет с классификатором по лесу ```from sklearn.ensemble import RandomForestClassifier```
+
+Пакет с классификатором One vs Rest ```from sklearn.multiclass import OneVsRestClassifier```
+
+Пакет с методом главных компонент ```from sklearn.decomposition import PCA```
+
+Пакет с датасетами```from keras.datasets import mnist```
 
 
 
@@ -70,11 +82,19 @@
 Строку под номером i не считая заголовков:
 ```df.iloc[[i]]```
 
+Доступ к ячейке в строке с индексом  *"row_name"* и колонке с названием *'Label'*
+```
+idx = list(DATA.index).index("row_name")
+df[idx][DATA['Label'][idx]]
+```
+
 # Numpy
 reshape
 ```np.asarray(data).reshape(n, 1)```
 
-Среднее ```x_mean = np.mean(x)```
+Среднее для строчки ```x_mean = np.mean(line_index)```
+
+Среднее для колонки ```np.mean(table.transpose()[column_index]))```
 
 #LinearRegression
 
@@ -90,6 +110,39 @@ R квадрат статистка ```r2 = reg.score(x, y)```
 
 Параметры регрессии b_1: ```reg.coef_```
 
+# PCA Метод главных компонент
+
+Здесь мы задаём в качестве n_components количество главных компонент, которые мы хотим взять.
+svd_solver='full' значит, что метод будет решать "честно", а не рандомизированно.
+PCA возвращает объект, у которого есть какое-то количество методов
+для вытаскивания полученных данных
+```pca = PCA(n_components=10, svd_solver='full')```
+
+Метод fit_transform применяет метод к объекту X и переводит его в новые координаты
+с уменьшением размерности
+у него в первом столбце координаты всех объектов по первой главной компоненте,
+во втором -- их же координаты по второй ГК и т.д.
+```X_transformed = pca.fit_transform(X)```
+
+Можно сделать это отдельно:
+```
+pca.fit(x)
+pca.transform(x)
+```
+
+Координата k объекта относительно i компонент: ```X_transformed[k][i]```
+
+Считаем сумму доль дисперсий вносимых добавлением каждой новой главной компоненты
+pca -> это объект, который мы получаем считая МГК для указанного количества компонент
+explained_variance_ratio_ -> метод pca выдающий сколько добавление каждой новой компоненты
+добавляет в долю необъяснённой дисперсии.
+
+```np.cumsum``` -> считает сумму массива с накоплением [1, 2, 3] -> [1, 3, 6]
+
+```explained_variance = np.cumsum(pca.explained_variance_ratio_)```
+
+Доля необъяснённой дисперсии для i + 1 компонент:``` explained_variance[i]```
+
 # LogisticRegression
 ```reg = LogisticRegression(random_state=, solver='lbfgs').fit(X, y)```
 
@@ -98,6 +151,9 @@ R квадрат статистка ```r2 = reg.score(x, y)```
 Предсказать вероятности оценок ```Y_pred_probs = reg.predict_proba(X_test)```
 
 ```predict_proba()``` возвращает таблицу, где каждая строка соответствует ```i``` объекту выборки, а каждый столбец к ```j``` классу
+
+Это можно сделать даже для таблицы с объектами:
+```y_pred = reg.predict_proba(x_test)``` 
 
 Пример: `For candy {question_candy_name1} probability of 0 = {Y_pred_probs[candy1_number][0]}`
 
@@ -186,8 +242,16 @@ def extract_histogram(image, bins=(8, 8, 8)):
 ```train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.2, shuffle=False)```
 
 # DecisionTreeClassifier
+Метод создания модели дерева
+```tree = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=10, max_leaf_nodes=15, random_state=2020)```
 
+Метод обучения дерева на тренировочных данных
+```clf = tree.fit(train_x, train_y)```
 
+Глубина дерева ```clf.tree_.max_depth```
+
+Предсказать вероятности для каждого класса, что объект будет к нему отнесён:
+```y_pred = clf.predict_proba(test_x)``` 
 
 ## Визуализация дерева .dot
 
@@ -210,8 +274,38 @@ graphviz.Source(dot_graph)
 ```
 
 В итоге, запуск программы сгенерит файл tree.dot который можно открыть (ctrl + shift + v в vscode) 
-
 и посмотреть на само дерево глазами, если устновить дополнение: *Graphviz (dot) language support for Visual Studio Code*
 
+# RandomForestClassifier
+Метод создания модели. Внимательнее с параметрами, лучше смотреть документацию
+```random_forest = RandomForestClassifier(criterion='gini', min_samples_leaf=10, max_depth=20, n_estimators=10, random_state=54) ```
+
+```clf_random_forest = OneVsRestClassifier(random_forest)```
+
+```clf_random_forest.fit(X_train, y_train)```
+
+Предсказание с помощью этой модели
+```y_pred = clf_random_forest.predict(X_test)```
+
+Метрика -- *матрица ошибок* -- таблица n x n, если предикторов n штук
+в каждой ячейке (i, j) указано сколько предсказано случаев, когда реально было i а предсказали j. 
+```CM = confusion_matrix(y_test, y_pred)```
 
 
+Предсказать вероятности для каждого класса, что объект будет к нему отнесён:
+```y_pred = clf_random_forest.predict_proba(X_test)``` 
+
+# MNIST
+Загрузить датасет с рукописными циферками
+```(X_train, y_train), (X_pred, y_pred) = mnist.load_data()```
+
+Там картинки размера 28*28, т.е. надо будет ещё данные reshape-ить:
+```
+x_train_reshaped = X_train.reshape(len(X_train), 784)
+```
+
+# OneVsRestClassifier
+clasificator_model == модель которой мы будем обучать много мелких датасетов
+train_x, train_y -- тренировочные данные из которых будем делать датасеты
+
+```clf = OneVsRestClassifier(clasificator_model).fit(train_x, train_y)```
